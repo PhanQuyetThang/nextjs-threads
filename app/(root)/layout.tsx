@@ -36,7 +36,6 @@ export default function RootLayout({
           </main>
           <Bottombar />
         </body>
-
       </html>
     </ClerkProvider>
   )
