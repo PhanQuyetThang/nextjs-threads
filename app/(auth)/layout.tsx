@@ -1,6 +1,7 @@
 import { ClerkProvider } from "@clerk/nextjs"
 import { Inter } from "next/font/google"
 
+import "../globals.css"
 
 export const metadata = {
     Title: "Threads",
@@ -17,10 +18,9 @@ export default function RootLayout({
     return (
         <ClerkProvider>
             <html lang="en">
-                <body className={`${inter.className} bg-dark-1`}>
+                <body className={`${inter.className} bg-dark-2`}>
                     {children}
                 </body>
-
             </html>
         </ClerkProvider>
     )
