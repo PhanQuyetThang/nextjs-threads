@@ -4,7 +4,9 @@ import RightSidebar from "@/components/shared/RightSidebar"
 import Topbar from "@/components/shared/Topbar"
 import { ClerkProvider } from "@clerk/nextjs"
 import { Inter } from "next/font/google"
-
+import { Toaster } from 'react-hot-toast';
+import { Suspense } from "react"
+import Loading from "@/components/ui/loading"
 import "../globals.css"
 import { Metadata } from "next"
 
@@ -23,18 +25,22 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${inter.className} bg-dark-1`}>
+        <body className={`${inter.className} bg-light-1`}>
+          <Toaster position="top-center" />
           <Topbar />
-          <main className="flex flex-row">
-            <LeftSidebar />
-            <section className="main-container">
-              <div className="w-full max-w-4xl">
-                {children}
-              </div>
-            </section>
-            <RightSidebar />
-          </main>
+          <Suspense fallback={<Loading />}>
+            <main className="flex flex-row">
+              <LeftSidebar />
+              <section className="main-container">
+                <div className="w-full max-w-5xl">
+                  {children}
+                </div>
+              </section>
+              <RightSidebar />
+            </main>
+          </Suspense>
           <Bottombar />
+
         </body>
       </html>
     </ClerkProvider>

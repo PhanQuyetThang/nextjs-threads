@@ -24,7 +24,8 @@ const Topbar = () => {
                     appearance={{
                         baseTheme: dark,
                         elements: {
-                            organizationSwitcherTrigger: "py-2 px-4"
+                            organizationSwitcherTrigger: "py-2 px-8 rounded-full hover:bg-gray-100 duration-300 text-gray-2 duration-300",
+                            userPreviewAvatarBox: "rounded-full bg-gray-2",
                         }
                     }}
                 />

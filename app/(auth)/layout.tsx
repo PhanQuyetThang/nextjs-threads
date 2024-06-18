@@ -1,5 +1,7 @@
 import { ClerkProvider } from "@clerk/nextjs"
 import { Inter } from "next/font/google"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import "../globals.css"
 
@@ -18,7 +20,7 @@ export default function RootLayout({
     return (
         <ClerkProvider>
             <html lang="en">
-                <body className={`${inter.className} bg-dark-2`}>
+                <body className={`${inter.className} flex justify-center items-center mt-8 bg-light-2`}>
                     {children}
                 </body>
             </html>
