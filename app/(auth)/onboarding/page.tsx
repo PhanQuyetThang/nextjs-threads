@@ -22,7 +22,7 @@ async function Page() {
             </h1>
             <p className="text-base-regular text-light-2">Complete your profile to use Threads</p>
 
-            <section className="bg-light-1 p-10 rounded-xl">
+            <section className="bg-light-1 p-10 rounded-xl shadow-xl">
                 <AccountProfile
                     user={userData}
                     btnTitle="Continue" />

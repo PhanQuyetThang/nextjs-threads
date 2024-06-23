@@ -10,7 +10,7 @@
 
   /* Head Text */
   .head-text {
-    @apply text-heading2-bold text-gray-2;
+    @apply text-heading2-bold text-gray-1;
   }
 
   /* Activity */
@@ -135,7 +135,7 @@
 
 /* Tab */
 .tab {
-  @apply flex min-h-[50px] flex-1 items-center gap-3 bg-dark-2 text-light-2 data-[state=active]:bg-[#0e0e12] data-[state=active]:text-light-2 !important;
+  @apply flex min-h-[50px] flex-1 items-center bg-white gap-3 text-gray-2 data-[state=active]:border-b-2 data-[state=active]:text-dark-2 !important;
 }
 
 .no-focus {
@@ -155,11 +155,16 @@
   @apply border border-gray-3 bg-light-1 text-gray-2 !important;
 }
 
+.follow{
+  @apply rounded-lg px-5 py-1.5 text-base-regular text-gray-2 hover:bg-gray-100 hover:text-dark-4 duration-300 !important;
+
+}
+
 /* Comment Form */
 .comment-form {
-  @apply mt-10 flex items-center gap-4 border-y border-y-dark-4 py-5 max-xs:flex-col !important;
+  @apply mt-10 flex items-center gap-4 py-5 max-xs:flex-col !important;
 }
 
 .comment-form_btn {
-  @apply rounded-3xl bg-primary-500 px-8 py-2 !text-small-regular text-light-1 max-xs:w-full !important;
+  @apply rounded-3xl px-8 py-2 !text-small-regular text-light-1 max-xs:w-full !important;
 }

@@ -13,6 +13,8 @@ async function Page() {
 
     const userInfo = await fetchUser(user.id);
     console.log("Check user info: ", userInfo);
+    // Chuyển đổi userInfo._id thành chuỗi
+    const userId = userInfo._id.toString();
 
     if (!userInfo?.onboarded) redirect('/onboarding');
 
@@ -20,7 +22,7 @@ async function Page() {
         <>
             <h1 className="head-text">Create Thread</h1>
             {/* <NotifyButton /> */}
-            <PostThread userId={user.id} />
+            <PostThread userId={userId} />
         </>
     );
 }

@@ -26,9 +26,9 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={`${inter.className} bg-light-1`}>
-          <Toaster position="top-center" />
-          <Topbar />
           <Suspense fallback={<Loading />}>
+            <Toaster position="top-center" />
+            <Topbar />
             <main className="flex flex-row">
               <LeftSidebar />
               <section className="main-container">
@@ -38,9 +38,8 @@ export default function RootLayout({
               </section>
               <RightSidebar />
             </main>
+            <Bottombar />
           </Suspense>
-          <Bottombar />
-
         </body>
       </html>
     </ClerkProvider>

@@ -17,90 +17,90 @@ import { Input } from "@/components/ui/input";
 import * as z from 'zod';
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
-import { Textarea } from "../ui/textarea";
 import { isBase64Image } from "@/lib/utils";
 import { useUploadThing } from '@/lib/uploadthing'
 import { updateUser } from "@/lib/actions/user.actions";
 import { usePathname, useRouter } from "next/navigation";
 
-import { ThreadValidation } from "@/lib/validations/thread";
-import { createThread } from '@/lib/actions/thread.actions';
+import { CommentValidation } from "@/lib/validations/thread";
+import { addCommentToThread, createThread } from '@/lib/actions/thread.actions';
 import toast from "react-hot-toast";
+
 interface Props {
-    user: {
-        id: string;
-        objectId: string;
-        username: string;
-        name: string;
-        bio: string;
-        image: string;
-    };
-    btnTitle: string;
+    threadId: string;
+    currentUserImg: string;
+    currentUserId: string;
 }
 
-
-function PostThread({ userId }: { userId: string }) {
+const Comment = ({ threadId, currentUserImg, currentUserId }: Props) => {
     const [loading, setLoading] = useState(false);
     const pathname = usePathname();
     const router = useRouter();
-    console.log("Check user id: ", userId);
 
 
 
     const form = useForm({
-        resolver: zodResolver(ThreadValidation),
+        resolver: zodResolver(CommentValidation),
         defaultValues: {
             thread: "",
-            accountId: userId,
+            accountId: '',
         }
     })
 
-    const onSubmit = async (values: z.infer<typeof ThreadValidation>) => {
+    const onSubmit = async (values: z.infer<typeof CommentValidation>) => {
         setLoading(true);
-        await createThread({
-            text: values.thread,
-            author: userId,
-            communityId: null,
-            path: pathname,
-        });
+        await addCommentToThread(
+            threadId,
+            values.thread,
+            JSON.parse(currentUserId),
+            pathname
+        );
+
+        form.reset();
         toast.success("Thread created successfully");
-        setTimeout(() => {
-            router.push('/');
-        }, 1000);
+        // setTimeout(() => {
+        //     router.push('/');
+        // }, 1000);
 
     }
+
     return (
         <>
             <Form {...form}>
 
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
-                    className="flex flex-col justify-start gap-1 bg-light-1 px-3 py-4 rounded-md">
+                    className="comment-form">
 
                     <FormField
                         control={form.control}
                         name="thread"
                         render={({ field }) => (
-                            <FormItem className="flex flex-col w-full items-start gap-1 mb-4">
-                                <FormLabel className="text-base-semibold text-gray-2">
-                                    Thread
+                            <FormItem className="flex w-full items-center gap-3">
+                                <FormLabel>
+                                    <Image
+                                        src={currentUserImg}
+                                        alt="Profile image"
+                                        width={48}
+                                        height={48}
+                                        className="rounded-full cursor-pointer object-contain"
+                                    />
                                 </FormLabel>
-                                <FormControl className="flex-1 text-base-semibold text-gray-2">
-                                    <Textarea
-                                        className='no-focus border-gray-3'
-                                        rows={10}
+                                <FormControl className="bg-transparent border-none">
+                                    <Input
+                                        className='no-focus'
+                                        placeholder="Comment..."
                                         {...field}
                                     />
                                 </FormControl>
-                                <FormMessage />
                             </FormItem>
                         )}
                     />
-                    <Button type="submit">Submit</Button>
+                    <Button type="submit" className="comment-form_btn">Reply</Button>
                 </form>
             </Form>
         </>
     )
 }
 
-export default PostThread;
+export default Comment;
