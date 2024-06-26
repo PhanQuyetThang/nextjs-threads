@@ -32,7 +32,7 @@ export async function createCommunity(
             username,
             image,
             bio,
-            createdBy: user._id, // Use the mongoose ID of the user
+            createdBy: user?._id, // Use the mongoose ID of the user
         });
 
         const createdCommunity = await newCommunity.save();
@@ -150,7 +150,7 @@ export async function fetchCommunities({
         const communities = await communitiesQuery.exec();
 
         // Check if there are more communities beyond the current page.
-        const isNext = totalCommunitiesCount > skipAmount + communities.length;
+        const isNext = totalCommunitiesCount > skipAmount + communities?.length;
 
         return { communities, isNext };
     } catch (error) {

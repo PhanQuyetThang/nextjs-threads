@@ -15,18 +15,18 @@ const LeftSidebar = () => {
         <section className="custom-scrollbar leftsidebar">
             <div className="flex w-full flex-1 flex-col px-6">
                 {sidebarLinks.map((link, index) => {
-                    const isActive = (pathname.includes(link.route) && link.route.length > 1) || pathname === link.route;
+                    const isActive = (pathname.includes(link?.route) && link?.route?.length > 1) || pathname === link?.route;
 
-                    if (link.route === '/profile') link.route = `${link.route}/${userId}`;
+                    if (link?.route === '/profile') link.route = `${link?.route}/${userId}`;
 
                     return (
                         <Link
-                            href={link.route}
-                            key={link.label}
+                            href={link?.route}
+                            key={link?.label}
                             className={`py-3 my-1 leftsidebar_link ${isActive && 'bg-gray-100 '} hover:bg-gray-100 duration-300`}
                         >
-                            <Image src={link.imgURL} alt={link.label} height={24} width={24} />
-                            <p className='text-gray-1 max-lg:hidden'>{link.label}</p>
+                            <Image src={link?.imgURL} alt={link?.label} height={24} width={24} />
+                            <p className='text-gray-1 max-lg:hidden'>{link?.label}</p>
                         </Link>
                     )
                 })}

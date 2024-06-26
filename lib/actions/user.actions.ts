@@ -30,7 +30,7 @@ export async function updateUser(
         await User.findOneAndUpdate(
             { id: userId },
             {
-                username: username.toLowerCase(),
+                username: username?.toLowerCase(),
                 name,
                 bio,
                 image,
@@ -88,7 +88,7 @@ export async function fetchPosts(pageNumber = 1, pageSize = 20) {
         const totalPostsCount = await Thread.countDocuments({ parentId: { $in: [null, undefined] } });
         const posts = await postQuery.exec();
 
-        const isNext = totalPostsCount > skipAmount + posts.length;
+        const isNext = totalPostsCount > skipAmount + posts?.length;
         return { posts, isNext };
 
     } catch (error: any) {
@@ -143,7 +143,7 @@ export async function fetchUsers({
             id: { $ne: userId },
         }
 
-        if (searchString.trim() !== '') {
+        if (searchString?.trim() !== '') {
             query.$or = [
                 { username: regex },
                 { name: regex },
@@ -161,7 +161,7 @@ export async function fetchUsers({
 
         const users = await usersQuery.exec();
 
-        const isNext = totalUsersCount > skipAmount + users.length;
+        const isNext = totalUsersCount > skipAmount + users?.length;
 
         return { users, isNext };
     } catch (error: any) {
@@ -170,19 +170,16 @@ export async function fetchUsers({
 }
 
 export async function getActivity(userId: string) {
-    console.log("Check user id: ", userId);
 
     try {
         connectToDB();
 
         //Find all threads created by the user
         const userThreads = await Thread.find({ author: userId });
-        console.log("-------------------------------------");
-
 
         //Collect a;; the child thread ids (replies) from the 'children' field
         const childThreadIds = userThreads.reduce((acc, userThread) => {
-            return acc.concat(userThread.children);
+            return acc.concat(userThread?.children);
         }, [])
 
         const replies = await Thread.find({
@@ -192,8 +189,6 @@ export async function getActivity(userId: string) {
             model: User,
             select: 'name image _id'
         })
-
-        // console.log("Check replies: ", replies);
 
         return replies;
     } catch (error: any) {

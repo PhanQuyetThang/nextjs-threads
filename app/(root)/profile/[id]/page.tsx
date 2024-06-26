@@ -14,53 +14,53 @@ async function Page({ params }: { params: { id: string } }) {
         redirect('/sign-in');
     }
 
-    const userInfo = await fetchUser(params.id);
-    console.log("Check user info: ", userInfo.threads);
+    const userInfo = await fetchUser(params?.id);
+    console.log("Check user info: ", userInfo?.threads);
 
     if (!userInfo?.onboarded) redirect('/onboarding');
     return (
         <section>
             <ProfileHeader
-                accountId={userInfo.id}
-                authUserId={user.id}
-                name={userInfo.name}
-                username={userInfo.username}
-                imageUrl={userInfo.image}
-                bio={userInfo.bio}
+                accountId={userInfo?.id}
+                authUserId={user?.id}
+                name={userInfo?.name}
+                username={userInfo?.username}
+                imageUrl={userInfo?.image}
+                bio={userInfo?.bio}
             />
             <div className="mt-9">
                 <Tabs defaultValue="threads" className="w-full">
                     <TabsList className="tab">
                         {profileTabs.map((tab) => (
                             <TabsTrigger
-                                key={tab.label}
-                                value={tab.value}
+                                key={tab?.label}
+                                value={tab?.value}
                                 className="tab"
                             >
                                 <Image
-                                    src={tab.icon}
-                                    alt={tab.label}
+                                    src={tab?.icon}
+                                    alt={tab?.label}
                                     width={24}
                                     height={24}
                                     className="object-contain"
                                 />
                                 <p className="max-sm:hidden">
-                                    {tab.label}
+                                    {tab?.label}
                                 </p>
                                 {tab.label === "Threads" && (
                                     <p className="ml-1 rounded-md bg-light-2 px-2 py-1 !text-tiny-medium text-dark-2">
-                                        {userInfo.threads.length}
+                                        {userInfo?.threads?.length}
                                     </p>
                                 )}
                             </TabsTrigger>
                         ))}
                     </TabsList>
                     {profileTabs.map((tab) => (
-                        <TabsContent key={`content-${tab.label}`} value={tab.value}
+                        <TabsContent key={`content-${tab?.label}`} value={tab?.value}
                             className="w-full text-gray-1">
                             <ThreadsTab
-                                currentUserId={user.id}
-                                accountId={userInfo.id}
+                                currentUserId={user?.id}
+                                accountId={userInfo?.id}
                                 accountType="User"
                             />
                         </TabsContent>

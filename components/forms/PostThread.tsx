@@ -13,14 +13,9 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import * as z from 'zod';
-import Image from "next/image";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import { Textarea } from "../ui/textarea";
-import { isBase64Image } from "@/lib/utils";
-import { useUploadThing } from '@/lib/uploadthing'
-import { updateUser } from "@/lib/actions/user.actions";
 import { usePathname, useRouter } from "next/navigation";
 
 import { ThreadValidation } from "@/lib/validations/thread";
@@ -58,7 +53,7 @@ function PostThread({ userId }: { userId: string }) {
     const onSubmit = async (values: z.infer<typeof ThreadValidation>) => {
         setLoading(true);
         await createThread({
-            text: values.thread,
+            text: values?.thread,
             author: userId,
             communityId: null,
             path: pathname,
@@ -74,11 +69,11 @@ function PostThread({ userId }: { userId: string }) {
             <Form {...form}>
 
                 <form
-                    onSubmit={form.handleSubmit(onSubmit)}
+                    onSubmit={form?.handleSubmit(onSubmit)}
                     className="flex flex-col justify-start gap-1 bg-light-1 px-3 py-4 rounded-md">
 
                     <FormField
-                        control={form.control}
+                        control={form?.control}
                         name="thread"
                         render={({ field }) => (
                             <FormItem className="flex flex-col w-full items-start gap-1 mb-4">

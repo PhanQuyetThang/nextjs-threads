@@ -15,20 +15,16 @@ interface Params {
 export async function createThread({ text, author, communityId, path }: Params) {
     try {
         connectToDB();
-        console.log("Check author: ", author);
-
 
         const createdThread = await Thread.create({
             text,
             author,
             community: null,
         });
-        console.log("Check id: ", author);
-
 
         //Update user model
         await User.findByIdAndUpdate(author, {
-            $push: { threads: createdThread._id }
+            $push: { threads: createdThread?._id }
         });
 
         revalidatePath(path);
@@ -77,11 +73,6 @@ export async function addCommentToThread(
 ) {
     try {
         connectToDB();
-        console.log("Check thread id: ", threadId);
-        console.log("Check comment text: ", commentText);
-        console.log("Check user id: ", userId);
-
-
 
         //Find the original thread by its ID
         const originalThread = await Thread.findById(threadId);
@@ -98,11 +89,11 @@ export async function addCommentToThread(
 
         //Save the new thread
         const savedCommentThread = await commentThread.save();
-        console.log("Check saved comment thread: ", savedCommentThread._id);
+        console.log("Check saved comment thread: ", savedCommentThread?._id);
 
 
         //Update the original thread to include the new comment
-        originalThread.children.push(savedCommentThread._id);
+        originalThread.children.push(savedCommentThread?._id);
 
 
         //Save the original thread

@@ -61,9 +61,9 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
 
         const fileReader = new FileReader();
 
-        if (e.target.files && e.target.files.length > 0) {
-            const file = e.target.files[0];
-            setFiles(Array.from(e.target.files));
+        if (e?.target?.files && e?.target?.files?.length > 0) {
+            const file = e?.target?.files[0];
+            setFiles(Array.from(e?.target?.files));
 
             if (!file.type.includes('image')) return;
 
@@ -79,7 +79,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
     }
 
     const onSubmit = async (values: z.infer<typeof UserValidation>) => {
-        const blob = values.profile_photo;
+        const blob = values?.profile_photo;
 
         const hasImageChanged = isBase64Image(blob);
 
@@ -92,11 +92,11 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
         }
         await updateUser(
             {
-                userId: user.id,
-                username: values.username,
-                name: values.name,
-                bio: values.bio,
-                image: values.profile_photo,
+                userId: user?.id,
+                username: values?.username,
+                name: values?.name,
+                bio: values?.bio,
+                image: values?.profile_photo,
                 path: pathname
             }
         )
@@ -115,17 +115,17 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
             <Toaster position="top-center" />
             <Form {...form}>
                 <form
-                    onSubmit={form.handleSubmit(onSubmit)}
+                    onSubmit={form?.handleSubmit(onSubmit)}
                     className="flex flex-col justify-start gap-1 bg-light-1 px-3 py-4 rounded-md">
                     <FormField
-                        control={form.control}
+                        control={form?.control}
                         name="profile_photo"
                         render={({ field }) => (
                             <FormItem className="flex items-center gap-4 mb-4">
                                 <FormLabel className="account-form_image-label">
-                                    {field.value ? (
+                                    {field?.value ? (
                                         <Image
-                                            src={field.value}
+                                            src={field?.value}
                                             alt="profile photo"
                                             width={96}
                                             height={96}
@@ -158,7 +158,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                     />
 
                     <FormField
-                        control={form.control}
+                        control={form?.control}
                         name="name"
                         render={({ field }) => (
                             <FormItem className="flex flex-col w-full items-start gap-1 mb-4">
@@ -178,7 +178,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                     />
 
                     <FormField
-                        control={form.control}
+                        control={form?.control}
                         name="username"
                         render={({ field }) => (
                             <FormItem className="flex flex-col w-full items-start gap-1 mb-4">
@@ -198,7 +198,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                     />
 
                     <FormField
-                        control={form.control}
+                        control={form?.control}
                         name="bio"
                         render={({ field }) => (
                             <FormItem className="flex flex-col w-full items-start gap-1 mb-4">

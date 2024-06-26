@@ -16,10 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import * as z from 'zod';
 import Image from "next/image";
-import { ChangeEvent, useState } from "react";
-import { isBase64Image } from "@/lib/utils";
-import { useUploadThing } from '@/lib/uploadthing'
-import { updateUser } from "@/lib/actions/user.actions";
+import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 import { CommentValidation } from "@/lib/validations/thread";
@@ -37,8 +34,6 @@ const Comment = ({ threadId, currentUserImg, currentUserId }: Props) => {
     const pathname = usePathname();
     const router = useRouter();
 
-
-
     const form = useForm({
         resolver: zodResolver(CommentValidation),
         defaultValues: {
@@ -51,7 +46,7 @@ const Comment = ({ threadId, currentUserImg, currentUserId }: Props) => {
         setLoading(true);
         await addCommentToThread(
             threadId,
-            values.thread,
+            values?.thread,
             JSON.parse(currentUserId),
             pathname
         );
@@ -69,11 +64,11 @@ const Comment = ({ threadId, currentUserImg, currentUserId }: Props) => {
             <Form {...form}>
 
                 <form
-                    onSubmit={form.handleSubmit(onSubmit)}
+                    onSubmit={form?.handleSubmit(onSubmit)}
                     className="comment-form">
 
                     <FormField
-                        control={form.control}
+                        control={form?.control}
                         name="thread"
                         render={({ field }) => (
                             <FormItem className="flex w-full items-center gap-3">

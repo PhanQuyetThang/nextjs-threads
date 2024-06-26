@@ -13,21 +13,21 @@ const ThreadsTab = async ({ currentUserId, accountId, accountType }: Props) => {
     if (!result) redirect('/');
     return (
         <div className="mt-9 flex flex-col gap-10">
-            {result.threads.map((thread: any) => (
+            {result?.threads?.map((thread: any) => (
                 <ThreadCard
-                    key={thread._id}
-                    id={thread._id}
+                    key={thread?._id}
+                    id={thread?._id}
                     currentUserId={currentUserId}
-                    parentId={thread.parentId}
-                    content={thread.text}
+                    parentId={thread?.parentId}
+                    content={thread?.text}
                     author={
                         accountType === "User"
-                            ? { name: result.name, image: result.image, id: result.id }
-                            : { name: thread.author.name, image: thread.author.image, id: thread.author.id }
+                            ? { name: result?.name, image: result?.image, id: result?.id }
+                            : { name: thread?.author?.name, image: thread?.author?.image, id: thread?.author?.id }
                     }
-                    community={thread.community}
-                    createdAt={thread.createdAt}
-                    comments={thread.children}
+                    community={thread?.community}
+                    createdAt={thread?.createdAt}
+                    comments={thread?.children}
                 />
             )
             )}
