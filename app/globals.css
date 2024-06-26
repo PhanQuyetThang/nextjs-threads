@@ -15,7 +15,7 @@
 
   /* Activity */
   .activity-card {
-    @apply flex items-center gap-2 rounded-md bg-dark-2 px-7 py-4;
+    @apply flex items-center gap-2 rounded-md px-7 py-4;
   }
 
   /* No Result */
@@ -47,7 +47,7 @@
   }
 
   .user-card_btn {
-    @apply h-auto min-w-[74px] rounded-lg bg-primary-500 text-[12px] text-light-1 !important;
+    @apply h-auto min-w-[74px] rounded-lg text-[12px] text-light-1 !important;
   }
 
   .searchbar {
