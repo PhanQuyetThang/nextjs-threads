@@ -10,6 +10,8 @@ interface Props {
 
 const ThreadsTab = async ({ currentUserId, accountId, accountType }: Props) => {
     const result = await fetchUserPosts(accountId);
+    console.log(result);
+
     if (!result) redirect('/');
     return (
         <div className="mt-9 flex flex-col gap-10">
