@@ -4,7 +4,7 @@ const nextConfig = {
         ignoreBuildErrors: true,
     },
     experimental: {
-        // Loại bỏ dòng `serverActions: true`, vì tùy chọn này không còn cần thiết
+        serverActions: true,
         serverComponentsExternalPackages: ["mongoose"],
     },
     images: {

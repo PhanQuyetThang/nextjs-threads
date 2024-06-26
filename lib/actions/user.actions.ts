@@ -91,7 +91,7 @@ export async function fetchPosts(pageNumber = 1, pageSize = 20) {
         const isNext = totalPostsCount > skipAmount + posts.length;
         return { posts, isNext };
 
-    } catch (error) {
+    } catch (error: any) {
         throw new Error(`Error fetching posts: ${error.message}`);
     }
 }
