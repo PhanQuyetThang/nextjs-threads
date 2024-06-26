@@ -1,4 +1,3 @@
-// next.config.mjs
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     typescript: {
@@ -27,9 +26,6 @@ const nextConfig = {
                 hostname: "placehold.co",
             },
         ],
-        typescript: {
-            ignoreBuildErrors: true,
-        },
     },
 };
 
