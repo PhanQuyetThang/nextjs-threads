@@ -27,6 +27,16 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-1834KJV041"></Script>
+        <Script id="google-analytics">
+          {
+            `window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-1834KJV041');`
+
+          }
+        </Script>
         <body className={`${inter.className} bg-light-1`}>
           <Toaster position="top-center" />
           <Topbar />
@@ -41,7 +51,6 @@ export default function RootLayout({
           </main>
           <Bottombar />
         </body>
-        <GoogleAnalytics gaId="G-EJ9BKVH0JR" />
       </html>
     </ClerkProvider>
   )
