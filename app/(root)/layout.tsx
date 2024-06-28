@@ -9,6 +9,8 @@ import { Suspense } from "react"
 import Loading from "@/components/ui/loading"
 import "../globals.css"
 import { Metadata } from "next"
+import Script from "next/script";
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 export const metadata: Metadata = {
   title: "Threads",
@@ -39,6 +41,7 @@ export default function RootLayout({
           </main>
           <Bottombar />
         </body>
+        <GoogleAnalytics gaId="G-EJ9BKVH0JR" />
       </html>
     </ClerkProvider>
   )
