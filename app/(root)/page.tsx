@@ -5,6 +5,7 @@ import ThreadCard from "@/components/cards/ThreadCard";
 
 import { fetchPosts } from "@/lib/actions/thread.actions";
 import { fetchUser } from "@/lib/actions/user.actions";
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 async function Home({
   searchParams,
@@ -47,6 +48,7 @@ async function Home({
           </>
         )}
       </section>
+      <GoogleAnalytics gaId="G-EJ9BKVH0JR" />
     </>
   );
 }
